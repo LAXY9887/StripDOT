@@ -33,3 +33,10 @@ or
 Download as zip file and unzip the archive.
 
 Executable file (StripDOT.exe) in /bin
+
+Execute StripDOT.exe
+
+`StripDOT.exe -i input.bed`
+
+Execute by Python3
+`python main.py -i input.bed`
