@@ -10,7 +10,7 @@ def prepare_parameters():
     --input     -i [file path] input file directory
     --targetCol -c [integer number] which coloumn contain transcript ID, default = 3 (bed format)
     --symbol    -s [text] what kind of symbol need to be strip, default = "."
-    --outDirPrefix -o [file path] output file directory
+    --outFile -o [file path/output file.txt] output file directory
     """
     
     opt = OptionParser(
@@ -24,11 +24,15 @@ def prepare_parameters():
     opt.add_option("-i","--input",
                    dest="in_file",
                    type="string",
-                   help="Please select a bed or gtf format file.")
+                   help="Please select a bed format file.")
     opt.add_option("-c","--targetCol",
                    dest="num",
                    type="int",
-                   help="Please select a bed or gtf format file.")
+                   help="Please enter column number.")
+    opt.add_option("-s","--symbol",
+                   dest="symbol",
+                   type="string",
+                   help="Please enter target symbol.")
     opt.add_option("-o","--output_file",
                    dest="out_file",
                    type="string",
@@ -38,17 +42,42 @@ def prepare_parameters():
 
 def parameter_validate(optparser):
     (options,args) = optparser.parse_args()
+    
+    # Check input file
     if not options.in_file:
         optparser.print_help()
         error("No input file!")
         sys.exit(1)
-    elif options.in_file[-4:] != ".txt":
+    elif options.in_file[-4:] != ".bed":
         optparser.print_help()
-        error("Please select a txt file!")
+        error("Please select a bed file!")
         sys.exit(1)
+    
+    # Check target column
+    if not options.num:
+        options.num = 3
+    elif not str.isnumeric(options.num):
+        optparser.print_help()
+        error("Please enter column number (integer)")
+        sys.exit(1)
+    
+    # Check target symbol
+    # Default was set to "."
+    if not options.symbol:
+        options.symbol = "."
         
+    # Check output file
+    # Default was set to "./converted.txt"
     if not options.out_file:
-        optparser.print_help()
-        error("No output selected!")
-        sys.exit(1)
+        options.out_file = "./converted.txt"
+        
     return options
+
+if __name__=="__main__":
+    print("""
+    stripDOT [OPTION] [Parameters]
+    --input     -i [file path] input file directory
+    --targetCol -c [integer number] which coloumn contain transcript ID, default = 3 (bed format)
+    --symbol    -s [text] what kind of symbol need to be strip, default = "."
+    --outDirPrefix -o [file path] output file directory
+    """)
