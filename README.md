@@ -27,4 +27,9 @@ This tool can also strip other symbols form other column.
 This will strip "_" from the 6th column in input.bed 
 
 ## Download this tool:
-`git colne`
+`git colne https://github.com/LAXY9887/StripDOT.git`
+
+### or 
+Download as zip file and unzip the archive.
+
+Executable file (StripDOT.exe) in /bin
