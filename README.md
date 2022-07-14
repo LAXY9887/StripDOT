@@ -39,4 +39,5 @@ Execute StripDOT.exe
 `StripDOT.exe -i input.bed`
 
 Execute by Python3
+
 `python main.py -i input.bed`
