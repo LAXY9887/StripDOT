@@ -24,4 +24,8 @@ This tool can also strip other symbols form other column.
 ### Example:
 `stripDOT -i input.bed -c 6 -s "_"`
 
+<<<<<<< HEAD
 This will strip "_" from the 6th column in input.bed 
+=======
+This will strip "_" from the 6th column in input.bed 
+>>>>>>> 08e3b3f99986f78f3f172bbf455d6b49c7b5d0f8
