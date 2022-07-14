@@ -26,3 +26,5 @@ This tool can also strip other symbols form other column.
 
 This will strip "_" from the 6th column in input.bed 
 
+## Download this tool:
+`git colne`
