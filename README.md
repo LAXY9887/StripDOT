@@ -1,5 +1,5 @@
 # StripDOT
-This is a simple python project to strip "." of Gene Accesssion ID form the 3rd column of a BED file.
+This is a simple python project to strip "." of Gene Accesssion ID form the 3rd column of a BED file and export a gene list.
 
 ## Usage:
     stripDOT [OPTION] [Parameters]
