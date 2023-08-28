@@ -3,14 +3,15 @@ from logging import error
 from optparse import OptionParser
 
 def prepare_parameters():
-    version = "Dot stripper v0.0"
-    description = "This program stript dot from all kind of refSeq ID that contain a dot in transcript ID."
+    version = "Dot stripper v0.1"
+    description = "This program stript dot(or other symbol) from gene/transcript ID."
     usage = """
     stripDOT [OPTION] [Parameters]
-    --input     -i [file path] input file directory
-    --targetCol -c [integer number] which coloumn contain transcript ID, default = 3 (bed format)
-    --symbol    -s [text] what kind of symbol need to be strip, default = "."
-    --outFile -o [file path/output file.txt] output file directory
+    --input     -i [file_path/file.bed] input a BED format file.
+    --targetCol -c [integer number] which coloumn contain transcript ID, default = 4 (bed format)
+    --symbol    -s [string] what kind of symbol need to be strip, default = "."
+    --sep       -p [string] Enter input file separation symbol, default = "\\t" (TAB)
+    --outFile   -o [file_path/output_file.txt] output a text file.
     """
     
     opt = OptionParser(
@@ -33,6 +34,10 @@ def prepare_parameters():
                    dest="symbol",
                    type="string",
                    help="Please enter target symbol.")
+    opt.add_option("-p","--sep",
+                   dest="sep",
+                   type="string",
+                   help="Please enter file separation.")
     opt.add_option("-o","--output_file",
                    dest="out_file",
                    type="string",
@@ -48,10 +53,6 @@ def parameter_validate(optparser):
         optparser.print_help()
         error("No input file!")
         sys.exit(1)
-    elif options.in_file[-4:] != ".bed":
-        optparser.print_help()
-        error("Please select a bed file!")
-        sys.exit(1)
     
     # Check target column
     if not options.num:
@@ -60,6 +61,11 @@ def parameter_validate(optparser):
         optparser.print_help()
         error("Please enter column number (integer)")
         sys.exit(1)
+
+    # Check sep option
+    # Default was set to "\t" (TAB)
+    if not options.sep:
+        options.sep = "\t"
     
     # Check target symbol
     # Default was set to "."
@@ -76,8 +82,9 @@ def parameter_validate(optparser):
 if __name__=="__main__":
     print("""
     stripDOT [OPTION] [Parameters]
-    --input     -i [file path] input file directory
-    --targetCol -c [integer number] which coloumn contain transcript ID, default = 3 (bed format)
-    --symbol    -s [text] what kind of symbol need to be strip, default = "."
-    --outDirPrefix -o [file path] output file directory
+    --input     -i [file_path/file.bed] input a BED format file.
+    --targetCol -c [integer number] which coloumn contain transcript ID, default = 4 (bed format)
+    --symbol    -s [string] what kind of symbol need to be strip, default = "."
+    --sep       -p [string] Enter input file separation symbol, default = "\\t" (TAB)
+    --outFile   -o [file_path/output_file.txt] output a text file.
     """)

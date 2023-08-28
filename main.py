@@ -13,12 +13,14 @@ parameters = option.parameter_validate(option.prepare_parameters())
 inputFile = parameters.in_file
 targetCol = parameters.num
 symbol = parameters.symbol
+sep = parameters.sep
 output = parameters.out_file
 
 strip(
       fileDir = inputFile,
       targetCol = targetCol,
       stripSymbol = symbol,
+      sep = sep,
       outFile = output
 )
 

@@ -1,12 +1,13 @@
 # StripDOT
-This is a simple python project to strip "." of Gene Accesssion ID form the 3rd column of a BED file and export a gene list.
+This is a simple python project to strip "." (or other symbol) of Gene/Transcript IDs form the 4th column of a BED file and export a gene list (text file).
 
 ## Usage:
     stripDOT [OPTION] [Parameters]
-    --input     -i [file path] input file directory
-    --targetCol -c [integer number] which coloumn contain transcript ID, default = 3 (bed format)
-    --symbol    -s [text] what kind of symbol need to be strip, default = "."
-    --outFile   -o [file path/output file.txt] output file directory
+    --input     -i [file_path/file.bed] input a BED format file.
+    --targetCol -c [integer number] which coloumn contain transcript ID, default = 4 (bed format)
+    --symbol    -s [string] what kind of symbol need to be strip, default = "."
+    --sep       -p [string] Enter input file separation symbol, default = "\\t" (TAB)
+    --outFile   -o [file_path/output_file.txt] output a text file.
 
 ## Example1:
 `stripDOT -i input.bed`
@@ -25,6 +26,14 @@ This tool can also strip other symbols form other column.
 `stripDOT -i input.bed -c 6 -s "_"`
 
 This will strip "_" from the 6th column in input.bed 
+
+## Update 2022-08-28
+This tool can also handle CSV (comma separate) format, it can also specify other symbol.
+
+### Example:
+`stripDOT -i input.csv -p "," -o path/output.txt`
+
+The `-p ","` option works on CSV format, and it will output "output.txt" at "path".
 
 ## Download this tool:
 `git colne https://github.com/LAXY9887/StripDOT.git`
